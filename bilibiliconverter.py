@@ -18,7 +18,7 @@ for root, dirs, files in os.walk("./", topdown=False):
                 name = info["page_data"]["download_subtitle"]
         elif "ep" in info:
             name = info["ep"]["index"]
-        name = re.sub(r'[\x00-\x2f\x3a-\x40\x5b-\x60\7b\7f]+', "_", name)
+        name = re.sub(r'[\x00-\x2f\x3a-\x40\x5b-\x60\x7b-\x7f]+', "_", name)
         print(name)
         os.system("ffmpeg -i %s/video.m4s -i %s/audio.m4s -vcodec copy -acodec copy '%s.mp4' -loglevel quiet" %
                   (os.path.join(root, dirs[0]), os.path.join(root, dirs[0]), os.getcwd()+"/"+name))
